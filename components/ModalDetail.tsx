@@ -21,10 +21,7 @@ const ModalDetail = ({
 				<Text style={styles.modalTitle}>Todo Detail</Text>
 				<Text style={styles.activeTodoValue}>{activeTodo.value}</Text>
 				<View style={styles.modalButtonsContainer}>
-					<TouchableOpacity
-						style={styles.buttonClose}
-						onPress={() => onHandleCancel()}
-					>
+					<TouchableOpacity style={styles.buttonClose} onPress={onHandleCancel}>
 						<Text style={styles.buttonCloseText}>Close</Text>
 					</TouchableOpacity>
 
