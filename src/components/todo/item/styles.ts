@@ -8,6 +8,9 @@ export const styles = StyleSheet.create({
 		marginVertical: 5,
 	},
 	todoItemText: {
-		fontSize: 16,
+		fontSize: 17,
 	},
+	completed: {
+		textDecorationLine: 'line-through',
+	}
 });

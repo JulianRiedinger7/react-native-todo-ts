@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, ListRenderItem, Text } from 'react-native';
+import { FlatList, ListRenderItem } from 'react-native';
 import { Todo } from '../../../../interfaces/todo';
 import TodoItem from '../item';
 
@@ -14,17 +14,11 @@ const TodoList = ({ todos, onHandleDetail }: Props) => {
 	);
 
 	return (
-		<>
-			{todos.length === 0 ? (
-				<Text>No tasks yet...</Text>
-			) : (
-				<FlatList
-					data={todos}
-					keyExtractor={(item) => item.id}
-					renderItem={renderItem}
-				/>
-			)}
-		</>
+		<FlatList
+			data={todos}
+			keyExtractor={(item) => item.id}
+			renderItem={renderItem}
+		/>
 	);
 };
 

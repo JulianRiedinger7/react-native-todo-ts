@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Alert, Text, View } from 'react-native';
+import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import { AddItem, ModalDetail, TodoList } from './components/index';
 import { Todo } from '../interfaces/todo';
 import { styles } from './styles';
@@ -12,6 +12,7 @@ export default function App() {
 	const [activeTodo, setActiveTodo] = useState<Todo>({
 		value: '',
 		id: '',
+		completed: false,
 	});
 
 	const onHandleChange = (text: string): void => setTask(text);
@@ -23,6 +24,7 @@ export default function App() {
 			{
 				value: task,
 				id: Math.random().toString(),
+				completed: false,
 			},
 		]);
 		setTask('');
@@ -40,9 +42,23 @@ export default function App() {
 		setModalVisible(!modalVisible);
 	};
 
-	const onHandleCancel = (): void => {
+	const onHandleCancel = (): void => setModalVisible(!modalVisible);
+
+	const onHandleComplete = (id: string): void => {
+		setTodos((prevTodos) =>
+			prevTodos.map((todo) =>
+				todo.id === id ? { ...todo, completed: !todo.completed } : todo
+			)
+		);
 		setModalVisible(!modalVisible);
 	};
+
+	const onHandleCompleteAll = (): void =>
+		setTodos((prevTodos) =>
+			prevTodos.map((todo) =>
+				!todo.completed ? { ...todo, completed: true } : todo
+			)
+		);
 
 	return (
 		<View style={styles.container}>
@@ -54,16 +70,28 @@ export default function App() {
 				onHandleChange={onHandleChange}
 			/>
 
-			<View>
-				<Text style={styles.todoListTitle}>Todo List</Text>
-				<TodoList onHandleDetail={onHandleDetail} todos={todos} />
-			</View>
+			{todos.length === 0 ? (
+				<Text style={{ marginTop: 20, fontSize: 20 }}>No tasks yet...</Text>
+			) : (
+				<View>
+					<View style={styles.todoListTitleContainer}>
+						<Text style={styles.todoListTitle}>Todo List</Text>
+						<TouchableOpacity style={styles.markAllButton}>
+							<Text style={styles.markAll} onPress={onHandleCompleteAll}>
+								Mark all as done
+							</Text>
+						</TouchableOpacity>
+					</View>
+					<TodoList onHandleDetail={onHandleDetail} todos={todos} />
+				</View>
+			)}
 
 			<ModalDetail
 				onHandleCancel={onHandleCancel}
 				onHandleDelete={onHandleDelete}
 				activeTodo={activeTodo}
 				modalVisible={modalVisible}
+				onHandleComplete={onHandleComplete}
 			/>
 		</View>
 	);

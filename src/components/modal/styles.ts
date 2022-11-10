@@ -25,10 +25,16 @@ export const styles = StyleSheet.create({
 		backgroundColor: 'lightblue',
 		paddingVertical: 10,
 		borderRadius: 5,
-		width: 100,
+		width: 70,
 	},
 	buttonDelete: {
 		backgroundColor: 'red',
+		paddingVertical: 10,
+		borderRadius: 5,
+		width: 70,
+	},
+	buttonChange: {
+		backgroundColor: 'green',
 		paddingVertical: 10,
 		borderRadius: 5,
 		width: 100,

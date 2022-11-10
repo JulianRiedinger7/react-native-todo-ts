@@ -14,7 +14,9 @@ const TodoItem = ({ item, onHandleDetail }: Props) => {
 			style={styles.todoItemContainer}
 			onPress={() => onHandleDetail(item)}
 		>
-			<Text style={styles.todoItemText}>{item.value}</Text>
+			<Text style={[styles.todoItemText, item.completed && styles.completed]}>
+				{item.value}
+			</Text>
 		</TouchableOpacity>
 	);
 };
