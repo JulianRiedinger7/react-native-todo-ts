@@ -2,8 +2,14 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
 	container: {
-		marginVertical: 50,
+		justifyContent: 'center',
+		alignItems: 'center',
+		flex: 1
+	},
+	image: {
+		paddingVertical: 50,
 		paddingHorizontal: 20,
+		flex: 1,
 	},
 	appTitle: {
 		textAlign: 'center',
@@ -12,7 +18,7 @@ export const styles = StyleSheet.create({
 		marginBottom: 20,
 	},
 	todoListTitle: {
-		
+		color: 'white',
 		fontWeight: 'bold',
 		fontSize: 22,
 	},

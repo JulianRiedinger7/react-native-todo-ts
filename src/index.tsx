@@ -1,6 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Alert, Text, TouchableOpacity, View } from 'react-native';
+import {
+	Alert,
+	ImageBackground,
+	Text,
+	TouchableOpacity,
+	View,
+} from 'react-native';
 import { AddItem, ModalDetail, TodoList } from './components/index';
 import { Todo } from '../interfaces/todo';
 import { styles } from './styles';
@@ -62,37 +68,47 @@ export default function App() {
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.appTitle}>Todo App!</Text>
-			<StatusBar style="auto" />
-			<AddItem
-				task={task}
-				onHandleAdd={onHandleAdd}
-				onHandleChange={onHandleChange}
-			/>
+			<ImageBackground
+				source={{
+					uri: 'https://images.unsplash.com/photo-1453475250267-163ff185e88e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80',
+				}}
+				resizeMode="cover"
+				style={styles.image}
+			>
+				<Text style={styles.appTitle}>Todo App!</Text>
+				<StatusBar style="auto" />
+				<AddItem
+					task={task}
+					onHandleAdd={onHandleAdd}
+					onHandleChange={onHandleChange}
+				/>
 
-			{todos.length === 0 ? (
-				<Text style={{ marginTop: 20, fontSize: 20 }}>No tasks yet...</Text>
-			) : (
-				<View>
-					<View style={styles.todoListTitleContainer}>
-						<Text style={styles.todoListTitle}>Todo List</Text>
-						<TouchableOpacity style={styles.markAllButton}>
-							<Text style={styles.markAll} onPress={onHandleCompleteAll}>
-								Mark all as done
-							</Text>
-						</TouchableOpacity>
+				{todos.length === 0 ? (
+					<Text style={{ marginTop: 20, fontSize: 20, color: 'white' }}>
+						No tasks yet...
+					</Text>
+				) : (
+					<View>
+						<View style={styles.todoListTitleContainer}>
+							<Text style={styles.todoListTitle}>Todo List</Text>
+							<TouchableOpacity style={styles.markAllButton}>
+								<Text style={styles.markAll} onPress={onHandleCompleteAll}>
+									Mark all as done
+								</Text>
+							</TouchableOpacity>
+						</View>
+						<TodoList onHandleDetail={onHandleDetail} todos={todos} />
 					</View>
-					<TodoList onHandleDetail={onHandleDetail} todos={todos} />
-				</View>
-			)}
+				)}
 
-			<ModalDetail
-				onHandleCancel={onHandleCancel}
-				onHandleDelete={onHandleDelete}
-				activeTodo={activeTodo}
-				modalVisible={modalVisible}
-				onHandleComplete={onHandleComplete}
-			/>
+				<ModalDetail
+					onHandleCancel={onHandleCancel}
+					onHandleDelete={onHandleDelete}
+					activeTodo={activeTodo}
+					modalVisible={modalVisible}
+					onHandleComplete={onHandleComplete}
+				/>
+			</ImageBackground>
 		</View>
 	);
 }
