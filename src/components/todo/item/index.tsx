@@ -1,6 +1,7 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import React from 'react';
-import { Todo } from '../interfaces/todo';
+import { Todo } from '../../../../interfaces/todo';
+import { styles } from './styles';
 
 interface Props {
 	item: Todo;
@@ -19,15 +20,3 @@ const TodoItem = ({ item, onHandleDetail }: Props) => {
 };
 
 export default TodoItem;
-
-const styles = StyleSheet.create({
-	todoItemContainer: {
-		backgroundColor: 'pink',
-		padding: 10,
-		borderRadius: 10,
-		marginVertical: 5,
-	},
-	todoItemText: {
-		fontSize: 16,
-	},
-});
